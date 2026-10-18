@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNOW - THAI YANTRA HOODIES</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt & Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#FAF8F5',
+                            card: '#FFFFFF',
+                            text: '#121212',
+                            muted: '#666666',
+                            border: '#E5E0D8',
+                            accent: '#2B2B2B',
+                            gold: '#C5A059'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'Kanit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #121212;
+            font-family: 'Prompt', sans-serif;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1CCC4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A39E95;
+        }
+
+        .yantra-bg-pattern {
+            background-color: #FAF8F5;
+            background-image: radial-gradient(#121212 0.75px, transparent 0.75px), radial-gradient(#121212 0.75px, #FAF8F5 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.95;
+        }
+
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-black selection:text-white">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Announcement Bar -->
+    <div class="bg-black text-white text-xs py-2 text-center tracking-widest font-light uppercase px-4 flex justify-center items-center gap-2">
+        <span>❄️ SNOW COLLECTION - ราคาพิเศษทุกตัวเพียง ฿1,290 บาท (จัดส่งฟรีทั่วประเทศ) ❄️</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 glass-nav border-b border-brand-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <!-- SVG Logo Icon mimicking Thai Yantra + Snowflake -->
+                    <svg class="w-10 h-10 transform group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" stroke="#121212" stroke-width="2" stroke-dasharray="4 2"/>
+                        <circle cx="50" cy="50" r="25" stroke="#121212" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="10" stroke="#121212" stroke-width="2"/>
+                        <!-- Yantra Spirals & Snowflake elements -->
+                        <path d="M50 5 V25 M50 75 V95 M5 50 H25 M75 50 H95" stroke="#121212" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M18 18 L32 32 M68 68 L82 82 M18 82 L32 68 M68 32 L82 18" stroke="#121212" stroke-width="1.5"/>
+                        <path d="M50 20 C45 10 55 5 50 0" stroke="#121212" stroke-width="1.5" fill="none"/>
+                    </svg>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold tracking-wider leading-none font-sans">SNOW</span>
+                        <span class="text-[9px] tracking-widest text-brand-muted font-medium mt-1 uppercase">THAI YANTRA HOODIES</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#home" class="hover:text-brand-gold transition-colors">หน้าแรก</a>
+                    <a href="#collection" class="hover:text-brand-gold transition-colors">คอลเลกชัน (9 รุ่น)</a>
+                    <a href="#about" class="hover:text-brand-gold transition-colors">เกี่ยวกับแบรนด์</a>
+                    <a href="#contact" class="hover:text-brand-gold transition-colors">ติดต่อเรา</a>
+                </div>
+
+                <!-- Search & Cart Options -->
+                <div class="flex items-center space-x-5">
+                    <!-- Search Input -->
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="ค้นหารุ่น/ลายยันต์..." 
+                            class="bg-white/80 border border-brand-border text-xs rounded-full py-2 pl-9 pr-4 focus:outline-none focus:border-black w-40 focus:w-56 transition-all duration-300">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-brand-muted"></i>
+                    </div>
+
+                    <!-- Cart Icon Button -->
+                    <button onclick="toggleCart()" class="relative p-2 text-brand-text hover:text-brand-gold transition-colors focus:outline-none">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-brand-bg transition-transform duration-300 scale-0">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-xl p-1 text-brand-text focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border bg-brand-bg px-4 py-4 space-y-3">
+            <input type="text" id="search-input-mobile" onkeyup="filterProductsMobile()" placeholder="ค้นหารุ่น/ลายยันต์..." 
+                class="w-full bg-white border border-brand-border text-xs rounded-lg py-2 pl-9 pr-4 focus:outline-none mb-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-sm font-medium hover:text-brand-gold">หน้าแรก</a>
+            <a href="#collection" onclick="toggleMobileMenu()" class="block text-sm font-medium hover:text-brand-gold">คอลเลกชัน (9 รุ่น)</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-sm font-medium hover:text-brand-gold">เกี่ยวกับแบรนด์</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-sm font-medium hover:text-brand-gold">ติดต่อเรา</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner Section -->
+    <section id="home" class="relative py-16 md:py-24 border-b border-brand-border overflow-hidden bg-stone-100/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-black text-white text-xs px-3 py-1 rounded-full uppercase tracking-widest">
+                        <i class="fa-regular fa-snowflake text-xs"></i> SNOW EXCLUSIVE COLLECTION
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black leading-tight">
+                        สายมูสไตล์สตรีท <br/>
+                        <span class="font-light text-brand-muted text-3xl sm:text-4xl lg:text-5xl">ผสานความศักดิ์สิทธิ์ & แฟชั่น</span>
+                    </h1>
+                    <p class="text-brand-muted text-sm sm:text-base max-w-lg leading-relaxed font-light">
+                        เสื้อฮู้ดสตรีทแวร์เกรดพรีเมียม ถ่ายทอดมนต์ขลังแห่งศาสตร์ลายยันต์ไทย สู่ดีไซน์ร่วมสมัย เรียบหรู เสริมสิริมงคลและความมั่นใจในทุกการแต่งกาย
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
+                        <a href="#collection" class="w-full sm:w-auto text-center bg-black hover:bg-neutral-800 text-white px-8 py-3.5 rounded-full font-medium text-sm transition-all shadow-lg hover:shadow-xl">
+                            เลือกชมเสื้อฮู้ดทั้ง 9 รุ่น (฿1,290)
+                        </a>
+                        <a href="#about" class="w-full sm:w-auto text-center border border-black hover:bg-black hover:text-white px-8 py-3.5 rounded-full font-medium text-sm transition-all">
+                            เรื่องราวของแบรนด์
+                        </a>
+                    </div>
+                    <div class="pt-6 border-t border-stone-200/80 grid grid-cols-3 gap-4 text-center md:text-left">
+                        <div>
+                            <span class="block text-xl font-bold text-black">100%</span>
+                            <span class="text-xs text-brand-muted">Premium Cotton</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-bold text-black">฿1,290</span>
+                            <span class="text-xs text-brand-muted">ราคาเดียวทุกแบบ</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-bold text-black">FREE</span>
+                            <span class="text-xs text-brand-muted">จัดส่งฟรีทั่วไทย</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Banner -->
+                <div class="relative flex justify-center items-center">
+                    <div class="w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-stone-200/60 absolute -z-10 animate-pulse"></div>
+                    <div class="relative bg-white p-6 rounded-3xl shadow-2xl border border-stone-200 max-w-sm w-full text-center">
+                        <div class="relative rounded-2xl overflow-hidden bg-stone-50 p-4 border border-stone-100">
+                            <!-- SVG Hoodie Representation -->
+                            <svg class="w-full h-64 mx-auto" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M60 40 Q100 25 140 40 L175 70 L155 95 L140 80 V175 H60 V80 L45 95 L25 70 Z" fill="#F4F1EA" stroke="#121212" stroke-width="2"/>
+                                <path d="M80 40 Q100 65 120 40" stroke="#121212" stroke-width="2" fill="none"/>
+                                <path d="M90 40 L90 70 M110 40 L110 70" stroke="#121212" stroke-width="1.5"/>
+                                <rect x="75" y="120" width="50" height="35" rx="3" fill="none" stroke="#121212" stroke-width="1.5"/>
+                                <!-- Yantra Center Graphic -->
+                                <circle cx="100" cy="95" r="14" stroke="#121212" stroke-width="1.5" stroke-dasharray="2 1"/>
+                                <path d="M100 83 V107 M88 95 H112" stroke="#121212" stroke-width="1"/>
+                                <circle cx="100" cy="95" r="4" fill="#121212"/>
+                            </svg>
+                            <span class="absolute top-3 right-3 bg-black text-white text-[10px] px-2 py-0.5 rounded-full">HOT</span>
+                        </div>
+                        <div class="mt-4 text-left">
+                            <span class="text-xs text-brand-gold font-semibold uppercase tracking-wider">SNOW LIMITED</span>
+                            <h3 class="text-lg font-bold text-black">THAI YANTRA HOODIE #01</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xl font-bold text-black">฿1,290</span>
+                                <span class="text-xs text-stone-500">รวมภาษี & ค่าจัดส่ง</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Grid Section -->
+    <section id="collection" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-brand-border">
+            <div>
+                <span class="text-xs font-semibold tracking-widest text-brand-gold uppercase">Catalog</span>
+                <h2 class="text-3xl font-bold tracking-tight text-black mt-1">คอลเลกชันเสื้อฮู้ด (9 รายการ)</h2>
+                <p class="text-brand-muted text-sm mt-1">ทุกตัวราคาเดียว ฿1,290 บาท | สามารถอัปโหลดรูปภาพของคุณเองเพื่อพรีวิวได้</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-3">
+                <span class="text-xs text-brand-muted">เรียงตาม:</span>
+                <select id="sort-select" onchange="sortProducts()" class="bg-white border border-brand-border rounded-lg text-xs py-2 px-3 focus:outline-none">
+                    <text>แนะนำ</text>
+                    <option value="default">รุ่นแนะนำ (01 - 09)</option>
+                    <option value="name">ชื่อรุ่น (ก-ฮ)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 3x3 Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Products inserted via JS -->
+        </div>
+    </section>
+
+    <!-- About Brand Section -->
+    <section id="about" class="py-16 bg-stone-100/70 border-t border-b border-brand-border">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-white border border-stone-300">
+                <i class="fa-solid fa-certificate text-2xl text-black"></i>
+            </div>
+            <h2 class="text-3xl font-bold tracking-tight text-black">ปรัชญาแห่งแบรนด์ SNOW</h2>
+            <p class="text-brand-muted text-sm sm:text-base leading-relaxed max-w-3xl mx-auto font-light">
+                **SNOW - THAI YANTRA HOODIES** เกิดจากการหลอมรวมมนต์เสน่ห์แห่งศาสตร์มูเตลูและอักขระยันต์ไทยอันทรงคุณค่า เข้ากับแฟชั่นสตรีทแวร์ยุคใหม่ 
+                เราเลือกสรรผ้าคอตตอนหนานุ่มเกรดพรีเมียม ตัดเย็บทรง Oversized สวมใส่สบาย 
+                เพื่อมอบประสบการณ์แฟชั่นศักดิ์สิทธิ์ที่ร่วมสมัย ใส่ได้ทุกวัน โดดเด่นอย่างมีสไตล์
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 text-left">
+                <div class="bg-white p-6 rounded-2xl border border-stone-200">
+                    <i class="fa-solid fa-shirt text-xl text-black mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">เนื้อผ้าพรีเมียม 100%</h4>
+                    <p class="text-xs text-brand-muted">ผ้า Cotton Comb หนา 320 กรัม ผ้านุ่ม ไม่หด ไม่ย้วย ระบายอากาศได้ดี</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200">
+                    <i class="fa-solid fa-[#121212] fa-pen-nib text-xl text-black mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">ลายสกรีนคมชัด High Density</h4>
+                    <p class="text-xs text-brand-muted">เทคนิคพิมพ์ลายยันต์นวัตกรรมสูง ทนทานต่อการซัก ไม่หลุดร่อนง่าย</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200">
+                    <i class="fa-solid fa-truck-fast text-xl text-black mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">จัดส่งด่วนฟรีทั่วไทย</h4>
+                    <p class="text-xs text-brand-muted">สินค้าพร้อมจัดส่งภายใน 1-2 วันทำการ แพ็คกล่องพิเศษอย่างดี</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm font-light">
+            <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl font-bold tracking-wider">SNOW</span>
+                </div>
+                <p class="text-stone-400 text-xs leading-relaxed">
+                    THAI YANTRA HOODIES<br/>
+                    เสื้อฮู้ดสายมูสไตล์สตรีท สะท้อนเอกลักษณ์แห่งความเชื่อและแฟชั่นอย่างลงตัว
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3 text-xs uppercase tracking-wider">เมนูลัด</h4>
+                <ul class="space-y-2 text-stone-400 text-xs">
+                    <li><a href="#home" class="hover:text-white transition-colors">หน้าแรก</a></li>
+                    <li><a href="#collection" class="hover:text-white transition-colors">เสื้อฮู้ดทั้งหมด (9 รุ่น)</a></li>
+                    <li><a href="#about" class="hover:text-white transition-colors">เกี่ยวกับเรา</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3 text-xs uppercase tracking-wider">บริการลูกค้า</h4>
+                <ul class="space-y-2 text-stone-400 text-xs">
+                    <li><a href="#" class="hover:text-white transition-colors">ตารางขนาดเสื้อ (Size Chart)</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">การจัดส่งและการคืนสินค้า</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">คำถามที่พบบ่อย (FAQ)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-3 text-xs uppercase tracking-wider">ติดตามเรา / ติดต่อสอบถาม</h4>
+                <div class="flex space-x-4 mb-3 text-lg">
+                    <a href="#" class="text-stone-400 hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-stone-400 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-stone-400 hover:text-white"><i class="fa-brands fa-line"></i></a>
+                    <a href="#" class="text-stone-400 hover:text-white"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+                <p class="text-stone-400 text-xs">Line: @snowhoodies</p>
+                <p class="text-stone-400 text-xs">Email: support@snowhoodies.com</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-stone-800 pt-6 text-center text-stone-500 text-xs">
+            © 2026 SNOW THAI YANTRA HOODIES. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Slide-out Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-black/50 transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cart-panel" class="w-screen max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 pointer-events-auto">
+                
+                <!-- Cart Header -->
+                <div class="p-6 border-b border-stone-200 flex justify-between items-center bg-stone-50">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-lg"></i>
+                        <h3 class="text-lg font-bold text-black">ตะกร้าสินค้า</h3>
+                        <span id="cart-count-title" class="text-xs bg-stone-200 text-black px-2 py-0.5 rounded-full">0 ชิ้น</span>
+                    </div>
+                    <button onclick="toggleCart()" class="text-stone-400 hover:text-black p-1 text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Dynamic Cart Items inserted by JS -->
+                </div>
+
+                <!-- Cart Footer & Checkout -->
+                <div class="p-6 border-t border-stone-200 bg-stone-50 space-y-3">
+                    <div class="flex justify-between text-xs text-stone-500">
+                        <span>ค่าจัดส่ง</span>
+                        <span class="text-emerald-600 font-medium">ฟรีทั่วประเทศ</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold text-black pt-2 border-t border-stone-200">
+                        <span>ราคารวมทั้งหมด</span>
+                        <span id="cart-total-price">฿0</span>
+                    </div>
+                    <button onclick="openCheckoutModal()" id="checkout-btn" disabled 
+                        class="w-full bg-black hover:bg-neutral-800 disabled:bg-stone-300 disabled:cursor-not-allowed text-white py-3.5 rounded-xl font-medium text-sm transition-all shadow-md">
+                        ดำเนินการสั่งซื้อ (PromptPay / QR)
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div id="quickview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuickView()" class="absolute top-5 right-5 text-stone-400 hover:text-black text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="quickview-content" class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment / Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-center space-y-4">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-stone-400 hover:text-black text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-[#121212] fa-qrcode"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-black">ชำระเงินผ่าน QR PromptPay</h3>
+            <p class="text-xs text-stone-500">สแกน QR Code เพื่อชำระเงินตามยอดรวมคำสั่งซื้อ</p>
+
+            <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200 inline-block w-full">
+                <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-inner flex flex-col items-center">
+                    <!-- Mock QR Code SVG -->
+                    <svg class="w-44 h-44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="white"/>
+                        <rect x="10" y="10" width="25" height="25" fill="black"/>
+                        <rect x="15" y="15" width="15" height="15" fill="white"/>
+                        <rect x="19" y="19" width="7" height="7" fill="black"/>
+                        
+                        <rect x="65" y="10" width="25" height="25" fill="black"/>
+                        <rect x="70" y="15" width="15" height="15" fill="white"/>
+                        <rect x="74" y="19" width="7" height="7" fill="black"/>
+
+                        <rect x="10" y="65" width="25" height="25" fill="black"/>
+                        <rect x="15" y="70" width="15" height="15" fill="white"/>
+                        <rect x="19" y="74" width="7" height="7" fill="black"/>
+
+                        <!-- Random QR Pattern -->
+                        <rect x="40" y="10" width="5" height="15" fill="black"/>
+                        <rect x="50" y="15" width="10" height="5" fill="black"/>
+                        <rect x="40" y="35" width="20" height="5" fill="black"/>
+                        <rect x="10" y="40" width="15" height="10" fill="black"/>
+                        <rect x="35" y="45" width="15" height="15" fill="black"/>
+                        <rect x="60" y="40" width="30" height="5" fill="black"/>
+                        <rect x="75" y="50" width="15" height="15" fill="black"/>
+                        <rect x="45" y="70" width="15" height="20" fill="black"/>
+                        <rect x="70" y="75" width="20" height="15" fill="black"/>
+                    </svg>
+                    <span id="checkout-final-amount" class="text-xl font-bold text-black mt-2">ยอดชำระ: ฿0</span>
+                </div>
+            </div>
+
+            <div class="text-left text-xs space-y-2 bg-stone-50 p-3 rounded-xl border border-stone-200">
+                <div class="flex justify-between">
+                    <span class="text-stone-500">ธนาคาร:</span>
+                    <span class="font-medium">กสิกรไทย (KBANK)</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-stone-500">ชื่อบัญชี:</span>
+                    <span class="font-medium">บจก. สโนว์ ไทย ยันต์ ฮู้ดดิ้ง</span>
+                </div>
+            </div>
+
+            <button onclick="confirmOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-medium text-sm transition-colors shadow-md">
+                <i class="fa-solid fa-check mr-1"></i> ยืนยันการแจ้งชำระเงิน
+            </button>
+        </div>
+    </div>
+
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Default 9 Hoodie Products (Price fixed at 1290 THB)
+        const FIXED_PRICE = 1290;
+        
+        let products = [
+            {
+                id: 1,
+                title: "SNOW Hoodie #01 - ยันต์ห้าแถว",
+                subtitle: "เมตตามหานิยม หนุนดวงชะตา โชคลาภ",
+                price: FIXED_PRICE,
+                description: "ลายสกรีนยันต์ห้าแถวมินิมอลบริเวณหน้าอกซ้ายและกลางหลัง เสริมพลังแห่งมหาเสน่ห์และความสำเร็จ",
+                image: null,
+                svgColor: "#121212",
+                bgColor: "#FAF8F5"
+            },
+            {
+                id: 2,
+                title: "SNOW Hoodie #02 - ยันต์มหาอุตม์",
+                subtitle: "แคล้วคลาด ปลอดภัย เสริมเกราะป้องกัน",
+                price: FIXED_PRICE,
+                description: "ดีไซน์ยันต์มหาอุตม์ทรงกลมบริเวณแผ่นหลัง สไตล์สตรีทมินิมอล ใส่แล้วสร้างความมั่นใจในทุกการเดินทาง",
+                image: null,
+                svgColor: "#1E1E1E",
+                bgColor: "#F4F1EA"
+            },
+            {
+                id: 3,
+                title: "SNOW Hoodie #03 - ยันต์เสือเหลียวหลัง",
+                subtitle: "อำนาจบารมี น่าเกรงขาม เสริมความเป็นผู้นำ",
+                price: FIXED_PRICE,
+                description: "ถ่ายทอดความสง่างามของยันต์เสือเหลียวหลังด้วยเส้นสายโมเดิร์น เหมาะสำหรับสายลุยและแฟชั่นสตรีท",
+                image: null,
+                svgColor: "#262626",
+                bgColor: "#EFECE6"
+            },
+            {
+                id: 4,
+                title: "SNOW Hoodie #04 - ยันต์แปดทิศ",
+                subtitle: "คุ้มครองแปดทิศทาง สยบสิ่งอัปมงคล",
+                price: FIXED_PRICE,
+                description: "ลายนพเคราะห์แปดทิศจัดวางสมดุลอย่างลงตัว ลายสกรีนนูนพิเศษ High Density สัมผัสพรีเมียม",
+                image: null,
+                svgColor: "#121212",
+                bgColor: "#FAF8F5"
+            },
+            {
+                id: 5,
+                title: "SNOW Hoodie #05 - ยันต์โสฬสมงคล",
+                subtitle: "สุดยอดมงคลครอบจักรวาล ร่ำรวยมั่งคั่ง",
+                price: FIXED_PRICE,
+                description: "สัญลักษณ์ยันต์โสฬสมงคลตารางกลม มงคลชั้นสูงที่ผสมผสานอักษรขอมโบราณและความเป็นแฟชั่นสตรีท",
+                image: null,
+                svgColor: "#1A1A1A",
+                bgColor: "#F5F2EC"
+            },
+            {
+                id: 6,
+                title: "SNOW Hoodie #06 - ยันต์พุฒซ้อน",
+                subtitle: "เสน่ห์นิยม คนรักคนเอ็นดู ติดต่อการงานราบรื่น",
+                price: FIXED_PRICE,
+                description: "ลายยันต์พุฒซ้อนขนาดพอดีบริเวณอกเสื้อ เรียบหรู ใส่ได้ง่ายในชีวิตประจำวัน",
+                image: null,
+                svgColor: "#2B2B2B",
+                bgColor: "#EAE6DF"
+            },
+            {
+                id: 7,
+                title: "SNOW Hoodie #07 - ยันต์เกราะเพชร",
+                subtitle: "สะท้อนสิ่งชั่วร้าย เสริมดวงการเงิน",
+                price: FIXED_PRICE,
+                description: "เส้นสายข่ายกลยันต์เกราะเพชรสไตล์ Geometric ลายเส้นคมกริบ ให้ลุคโมเดิร์นล้ำสมัย",
+                image: null,
+                svgColor: "#121212",
+                bgColor: "#FAF8F5"
+            },
+            {
+                id: 8,
+                title: "SNOW Hoodie #08 - ยันต์หนุมานเชิญธง",
+                subtitle: "ชัยชนะ พลังอำนาจ ก้าวหน้าในหน้าที่การงาน",
+                price: FIXED_PRICE,
+                description: "รูปทรงลายสลายหนุมานสไตล์ Minimal Graphic สื่อถึงความว่องไว ชัยชนะ และความสำเร็จ",
+                image: null,
+                svgColor: "#222222",
+                bgColor: "#F3EFEA"
+            },
+            {
+                id: 9,
+                title: "SNOW Hoodie #09 - ยันต์สิวลีมหาลาภ",
+                subtitle: "อุดมโภคทรัพย์ โชคลาภไหลมาเทมา",
+                price: FIXED_PRICE,
+                description: "ยันต์พระสิวลีผู้เป็นเลิศด้านโชคลาภ ออกแบบด้วยโทนสีมินิมอลขาว-ดำ เรียบแต่แฝงด้วยความขลัง",
+                image: null,
+                svgColor: "#121212",
+                bgColor: "#EBE7E0"
+            }
+        ];
+
+        // Shopping Cart State
+        let cart = [];
+
+        // Helper function to generate SVG Hoodie Thumbnail
+        function generateHoodieSVG(product) {
+            if (product.image) {
+                return `<img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover rounded-2xl">`;
+            }
+            return `
+                <div class="w-full h-full flex flex-col items-center justify-center p-4 relative" style="background-color: ${product.bgColor}">
+                    <svg class="w-40 h-40 sm:w-48 sm:h-48 drop-shadow-md transition-transform duration-300 hover:scale-105" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hoodie Base -->
+                        <path d="M55 42 Q100 25 145 42 L180 72 L158 98 L142 82 V180 H58 V82 L42 98 L20 72 Z" fill="#FFFFFF" stroke="${product.svgColor}" stroke-width="2.5"/>
+                        <!-- Hood Collar & Drawstrings -->
+                        <path d="M78 42 Q100 68 122 42" stroke="${product.svgColor}" stroke-width="2" fill="none"/>
+                        <path d="M88 42 L88 75 M112 42 L112 75" stroke="${product.svgColor}" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Pocket -->
+                        <rect x="72" y="125" width="56" height="38" rx="4" fill="none" stroke="${product.svgColor}" stroke-width="1.5"/>
+                        <!-- Yantra Center Emblem -->
+                        <g transform="translate(100, 92)">
+                            <circle cx="0" cy="0" r="15" stroke="${product.svgColor}" stroke-width="1.5" stroke-dasharray="3 1.5"/>
+                            <circle cx="0" cy="0" r="8" stroke="${product.svgColor}" stroke-width="1"/>
+                            <path d="M-15 0 H15 M0 -15 V15" stroke="${product.svgColor}" stroke-width="1"/>
+                            <circle cx="0" cy="0" r="3" fill="${product.svgColor}"/>
+                            <!-- Snowflake Icon accent -->
+                            <path d="M-4 -20 L0 -25 L4 -20 M0 -25 V-15" stroke="${product.svgColor}" stroke-width="1"/>
+                        </g>
+                    </svg>
+                    <span class="absolute bottom-2 right-2 text-[10px] text-stone-400 bg-white/80 px-2 py-0.5 rounded-full border border-stone-200">SNOW YANTRA</span>
+                </div>
+            `;
+        }
+
+        // Render Product Cards
+        function renderProducts(productList = products) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            if (productList.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-stone-400">
+                        <i class="fa-solid fa-magnifying-glass text-3xl mb-2"></i>
+                        <p>ไม่พบเสื้อฮู้ดที่คุณค้นหา</p>
+                    </div>
+                `;
+                return;
+            }
+
+            productList.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl p-5 border border-brand-border hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <!-- Hoodie Image Container -->
+                        <div class="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden bg-stone-50 border border-stone-100 flex items-center justify-center">
+                            ${generateHoodieSVG(product)}
+                            
+                            <!-- Custom Image Upload Button -->
+                            <label class="absolute top-3 right-3 bg-white/90 hover:bg-black hover:text-white text-stone-700 text-xs px-2.5 py-1.5 rounded-full cursor-pointer shadow-sm border border-stone-200 transition-colors flex items-center gap-1.5 z-10" title="อัปโหลดรูปเสื้อของคุณเอง">
+                                <i class="fa-solid fa-camera"></i>
+                                <span class="text-[11px] font-medium">เปลี่ยนรูป</span>
+                                <input type="file" accept="image/*" class="hidden" onchange="uploadProductImage(event, ${product.id})">
+                            </label>
+
+                            <!-- Badge -->
+                            <span class="absolute top-3 left-3 bg-black text-white text-[10px] font-semibold tracking-wider px-2.5 py-1 rounded-full uppercase">
+                                ฿1,290
+                            </span>
+                        </div>
+
+                        <!-- Product Information -->
+                        <div class="mt-5 space-y-1">
+                            <span class="text-[11px] text-brand-gold font-medium uppercase tracking-wider">${product.subtitle}</span>
+                            <h3 class="font-bold text-base text-black group-hover:text-brand-gold transition-colors">${product.title}</h3>
+                            <p class="text-xs text-brand-muted line-clamp-2 font-light mt-1">${product.description}</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions & Size Selection -->
+                    <div class="mt-5 pt-4 border-t border-stone-100 space-y-3">
+                        <!-- Size Selector -->
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-stone-400 font-medium">ไซส์:</span>
+                            <div class="flex gap-1" id="size-selector-${product.id}">
+                                ${['S', 'M', 'L', 'XL', '2XL'].map((size, idx) => `
+                                    <button onclick="selectSize(${product.id}, '${size}')" 
+                                        class="size-btn-${product.id} px-2 py-1 rounded-md border text-[11px] font-medium transition-colors ${idx === 2 ? 'border-black bg-black text-white' : 'border-stone-200 text-stone-600 hover:border-stone-400'}"
+                                        data-size="${size}">
+                                        ${size}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Price and Add Button -->
+                        <div class="flex items-center justify-between pt-1">
+                            <div>
+                                <span class="text-xs text-stone-400 block">ราคา</span>
+                                <span class="text-lg font-bold text-black">฿1,290</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="openQuickView(${product.id})" class="p-2.5 text-stone-600 hover:text-black bg-stone-100 hover:bg-stone-200 rounded-xl transition-colors" title="ดูรายละเอียดด่วน">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button onclick="addToCart(${product.id})" class="bg-black hover:bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-medium text-xs transition-colors flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-plus text-[10px]"></i> เพิ่มลงตะกร้า
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Handle Size Selection per product
+        const selectedSizes = {};
+        function selectSize(productId, size) {
+            selectedSizes[productId] = size;
+            const buttons = document.querySelectorAll(`.size-btn-${productId}`);
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-size') === size) {
+                    btn.className = `size-btn-${productId} px-2 py-1 rounded-md border text-[11px] font-medium transition-colors border-black bg-black text-white`;
+                } else {
+                    btn.className = `size-btn-${productId} px-2 py-1 rounded-md border text-[11px] font-medium transition-colors border-stone-200 text-stone-600 hover:border-stone-400`;
+                }
+            });
+        }
+
+        // Custom Image Upload Function
+        function uploadProductImage(event, productId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        product.image = e.target.result;
+                        renderProducts();
+                        showToast(`อัปโหลดรูปภาพใหม่สำหรับ ${product.title} เรียบร้อยแล้ว`);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add to Cart Functionality
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const size = selectedSizes[productId] || 'L'; // Default size L
+
+            const existingIndex = cart.findIndex(item => item.id === productId && item.size === size);
+
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    size: size,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`เพิ่ม "${product.title}" (ไซส์ ${size}) ลงในตะกร้าแล้ว`);
+        }
+
+        // Update Cart UI, Badge, Total
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const totalElement = document.getElementById('cart-total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const countTitle = document.getElementById('cart-count-title');
+
+            const totalItems = cart.reduce((sum, item) => sum += item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum += (item.price * item.quantity), 0);
+
+            // Badge Update
+            badge.innerText = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove('scale-0');
+                badge.classList.add('scale-100');
+            } else {
+                badge.classList.remove('scale-100');
+                badge.classList.add('scale-0');
+            }
+
+            countTitle.innerText = `${totalItems} ชิ้น`;
+            totalElement.innerText = `฿${totalPrice.toLocaleString()}`;
+
+            // Checkout button state
+            checkoutBtn.disabled = cart.length === 0;
+
+            // Render Cart Items List
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-center text-stone-400 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl"></i>
+                        <p class="text-sm">ตะกร้าของคุณยังไม่มีสินค้า</p>
+                        <button onclick="toggleCart()" class="text-xs text-black border border-black px-4 py-2 rounded-full hover:bg-black hover:text-white transition-colors">
+                            เลือกซื้อสินค้าเลย
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            cart.forEach((item, index) => {
+                const itemEl = document.createElement('div');
+                itemEl.className = "flex gap-4 p-3 bg-stone-50 rounded-2xl border border-stone-200/80 items-center";
+                
+                itemEl.innerHTML = `
+                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-white border border-stone-200 flex-shrink-0 flex items-center justify-center">
+                        ${item.image ? `<img src="${item.image}" class="w-full h-full object-cover">` : 
+                        `<svg class="w-10 h-10" viewBox="0 0 100 100" fill="none"><path d="M25 20 Q50 10 75 20 L90 35 L80 48 L70 40 V90 H30 V40 L20 48 L10 35 Z" fill="#FAF8F5" stroke="#121212" stroke-width="3"/></svg>`}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-bold text-black truncate">${item.title}</h4>
+                        <div class="flex items-center gap-2 mt-0.5">
+                            <span class="text-[10px] bg-stone-200 text-stone-700 px-1.5 py-0.5 rounded">ไซส์: ${item.size}</span>
+                            <span class="text-xs font-bold text-black">฿${item.price.toLocaleString()}</span>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateCartQuantity(${index}, -1)" class="w-6 h-6 rounded-md bg-white border border-stone-300 text-xs flex items-center justify-center hover:bg-stone-100">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="updateCartQuantity(${index}, 1)" class="w-6 h-6 rounded-md bg-white border border-stone-300 text-xs flex items-center justify-center hover:bg-stone-100">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-stone-400 hover:text-red-500 p-2 text-sm">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(itemEl);
+            });
+        }
+
+        function updateCartQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Toggle Cart Sidebar
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const panel = document.getElementById('cart-panel');
+            
+            if (sidebar.classList.contains('opacity-0')) {
+                sidebar.classList.remove('opacity-0', 'pointer-events-none');
+                panel.classList.remove('translate-x-full');
+            } else {
+                sidebar.classList.add('opacity-0', 'pointer-events-none');
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        // Quick View Modal
+        function openQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            const content = document.getElementById('quickview-content');
+            
+            content.innerHTML = `
+                <div class="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-stone-50 border border-stone-200 flex items-center justify-center">
+                    ${generateHoodieSVG(product)}
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-xs font-semibold text-brand-gold uppercase tracking-wider">${product.subtitle}</span>
+                        <h2 class="text-xl font-bold text-black mt-1">${product.title}</h2>
+                        <p class="text-2xl font-bold text-black mt-2">฿1,290</p>
+                    </div>
+                    <p class="text-xs text-brand-muted leading-relaxed font-light">${product.description}</p>
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-stone-700 block">รายละเอียดสินค้า:</label>
+                        <ul class="text-xs text-stone-600 space-y-1 list-disc list-inside">
+                            <li>เนื้อผ้า Cotton Comb 100% หนานุ่ม ทรง Oversized</li>
+                            <li>พิมพ์ลายยันต์ไทยสตรีท มงคล หนานุ่มคงทน</li>
+                            <li>มีเชือกปรับระดับฮู้ด พร้อมกระเป๋าหน้าอเนกประสงค์</li>
+                        </ul>
+                    </div>
+                    <button onclick="addToCart(${product.id}); closeQuickView();" class="w-full bg-black hover:bg-neutral-800 text-white py-3 rounded-xl font-medium text-xs transition-colors shadow-md">
+                        เพิ่มลงตะกร้าทันที (฿1,290)
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('quickview-modal').classList.remove('hidden');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickview-modal').classList.add('hidden');
+        }
+
+        // Checkout Modal Functions
+        function openCheckoutModal() {
+            const totalPrice = cart.reduce((sum, item) => sum += (item.price * item.quantity), 0);
+            document.getElementById('checkout-final-amount').innerText = `ยอดชำระ: ฿${totalPrice.toLocaleString()}`;
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function confirmOrder() {
+            closeCheckoutModal();
+            toggleCart();
+            cart = [];
+            updateCartUI();
+            
+            showToast("🎉 สั่งซื้อสำเร็จ! ทางแบรนด์ SNOW ได้รับคำสั่งซื้อเรียบร้อยแล้ว");
+        }
+
+        // Search and Filter Functions
+        function filterProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.subtitle.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        function filterProductsMobile() {
+            const query = document.getElementById('search-input-mobile').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.subtitle.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        function sortProducts() {
+            const value = document.getElementById('sort-select').value;
+            let sorted = [...products];
+            if (value === 'name') {
+                sorted.sort((a, b) => a.title.localeCompare(b.title, 'th'));
+            } else {
+                sorted.sort((a, b) => a.id - b.id);
+            }
+            renderProducts(sorted);
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-black text-white text-xs px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 border border-stone-800 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto";
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initial Render
+        window.onload = function() {
+            renderProducts();
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
